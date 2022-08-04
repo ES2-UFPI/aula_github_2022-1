@@ -1,11 +1,15 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Banco {
     private ArrayList<Cliente> listaCliente;
+    private ArrayList<Conta> contas = new ArrayList<Conta>();
 
+    
     public Banco() {
         listaCliente = new ArrayList();
+        
     }
     
 
@@ -43,5 +47,31 @@ public class Banco {
             listaCliente.remove(index);
             return "Cliente removido";
         }
+    }
+
+    public int findConta(int numero){
+        for(int i = 0; i < contas.size(); i++){
+            if(contas.get(i).getNumero() == numero)
+                return i;
+        }
+        return -1;
+    }
+
+    public void visualizarSaldo(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" ==== Visulizar saldo ==== \n");
+        
+        int index;
+        do
+        {
+            System.out.print("Digite seu numero da conta: ");
+            int numero = sc.nextInt();
+            index = findConta(numero);
+        }
+        while(index == -1);
+        
+        System.out.println("Saldo: " + contas.get(index).getSaldo());
+
+        //sc.close();
     }
 }   
